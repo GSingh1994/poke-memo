@@ -4,13 +4,14 @@ import "./App.scss";
 
 function App() {
   const [pokeData, setPokeData] = useState([]);
-  const [totalPokemons, setTotalPokemons] = useState(30);
+  const [lastIndex, setLastIndex] = useState(0);
   const [clickedCards, setClickedCards] = useState([]);
   const [userScore, setUserScore] = useState(-1);
   const [gameOver, setGameOver] = useState(false);
+
   useEffect(() => {
     const fetchUrl = async () => {
-      for (let i = 1; i < totalPokemons; i += 3) {
+      for (let i = 1; i < 150; i += 3) {
         let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}/`);
         const data = await response.json();
         setPokeData((preData) => [...preData, data]);
@@ -25,7 +26,13 @@ function App() {
       ? setGameOver(true)
       : setClickedCards([...clickedCards, id]);
   };
+
+  const pokeList = pokeData
+    .slice(lastIndex, lastIndex + 10) //get a slice of some old and some new data
+    .sort(() => Math.random() - 0.5); //Shuffle cards
+
   useEffect(() => {
+    setLastIndex((preIndex) => (preIndex += 1));
     gameOver ? setUserScore(0) : setUserScore((preScore) => (preScore += 1));
   }, [gameOver, clickedCards]);
 
@@ -33,10 +40,11 @@ function App() {
     <div className="App">
       <div className="scoreBoard">
         <div className="score">{userScore}</div>
+        <h1>{gameOver ? "GAME OVER" : null}</h1>
       </div>
 
       <main className="container">
-        {pokeData.map((pokemon) => (
+        {pokeList.map((pokemon) => (
           <Cards
             key={pokemon.id}
             id={pokemon.id}
@@ -51,5 +59,3 @@ function App() {
 }
 
 export default App;
-// let shuffled = pokeData.sort(() => Math.random() - 0.5);
-// const getRandomNums = (num) => Math.floor(Math.random() * num);
