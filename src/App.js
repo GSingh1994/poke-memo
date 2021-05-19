@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import Cards from "./Components/Cards";
+import ScoreBoard from "./Components/ScoreBoard";
+import "../node_modules/nes.css/css/nes.min.css";
 import "./App.scss";
 
 function App() {
@@ -38,11 +40,12 @@ function App() {
 
   return (
     <div className="App">
-      <div className="scoreBoard">
-        <div className="score">{userScore}</div>
-        <h1>{gameOver ? "GAME OVER" : null}</h1>
-      </div>
+      <header>
+        <h1>PokeCards</h1>
 
+        <i className="nes-pokeball"></i>
+      </header>
+      <ScoreBoard userScore={userScore} gameOver={gameOver} />
       <main className="container">
         {pokeList.map((pokemon) => (
           <Cards
