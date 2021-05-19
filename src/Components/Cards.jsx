@@ -1,8 +1,14 @@
 export default function Cards({ sprite, name, id, saveCard }) {
   return (
-    <div className="Cards" onClick={() => saveCard(id)}>
-      <img className="sprites" src={sprite} alt="" />
-      <h3>{name}</h3>
+    <div
+      id="Cards"
+      className="nes-pointer nes-container with-title is-centered is-rounded"
+      onClick={() => saveCard(id)}
+    >
+      <p id="title" className="title">
+        {name}
+      </p>
+      <img className="sprite" src={sprite} alt="" />
     </div>
   );
 }
