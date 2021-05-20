@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import Cards from "./Components/Cards";
 import ScoreBoard from "./Components/ScoreBoard";
 import Footer from "./Components/Footer";
+import Header from "./Components/Header";
 import "../node_modules/nes.css/css/nes.min.css";
 import "./App.scss";
+import loaderGif from "./assets/pika.gif";
 
 function App() {
   const [pokeData, setPokeData] = useState([]);
@@ -11,6 +13,7 @@ function App() {
   const [clickedCards, setClickedCards] = useState([]);
   const [userScore, setUserScore] = useState(-1);
   const [gameOver, setGameOver] = useState(false);
+  const [loader, setLoader] = useState(true);
 
   useEffect(() => {
     const fetchUrl = async () => {
@@ -21,6 +24,8 @@ function App() {
       }
     };
     fetchUrl();
+    const loaderTimer = setTimeout(() => setLoader(false), 1000);
+    return () => clearTimeout(loaderTimer);
   }, []);
 
   //save card's id only if it's unique otherwise GAMEOVER
@@ -30,23 +35,21 @@ function App() {
       : setClickedCards([...clickedCards, id]);
   };
 
-  const pokeList = pokeData
+  let pokeList = pokeData
     .slice(lastIndex, lastIndex + 8) //get a slice of some old and some new data
     .sort(() => Math.random() - 0.5); //Shuffle cards
 
   useEffect(() => {
+    pokeList = pokeData
+      .slice(lastIndex, lastIndex + 8) //get a slice of some old and some new data
+      .sort(() => Math.random() - 0.5);
     setLastIndex((preIndex) => (preIndex += 1));
     gameOver ? setUserScore(0) : setUserScore((preScore) => (preScore += 1));
   }, [gameOver, clickedCards]);
 
-  return (
+  return !loader ? (
     <div className="App">
-      <header>
-        <h1>PokeCards</h1>
-        <h6>Gotta Catch 'Em All</h6>
-        <i className="nes-ash"></i>
-        <i className="nes-pokeball"></i>
-      </header>
+      <Header gameOver={gameOver} />
       <ScoreBoard userScore={userScore} gameOver={gameOver} />
       <main className="container">
         {pokeList.map((pokemon) => (
@@ -61,7 +64,25 @@ function App() {
       </main>
       <Footer />
     </div>
+  ) : (
+    <div className="loader">
+      <img src={loaderGif} alt="" />
+    </div>
   );
 }
 
 export default App;
+
+// let shuffled = pokeData
+//   .slice(lastIndex, lastIndex + 8)
+//   .map((a) => ({ sort: Math.random(), value: a }))
+//   .sort((a, b) => a.sort - b.sort)
+//   .map((a) => a.value);
+// function shuffleCards(a) {
+//   const pokeList = a.slice(lastIndex, lastIndex + 8);
+//   for (let i = pokeList.length - 1; i > 0; i--) {
+//     const j = Math.floor(Math.random() * (i + 1));
+//     [pokeList[i], pokeList[j]] = [pokeList[j], pokeList[i]];
+//   }
+//   return pokeList;
+// }

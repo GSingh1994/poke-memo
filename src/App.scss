@@ -1,25 +1,29 @@
-.App {
-  header {
-    border-bottom: 3px solid black;
-    padding: 4rem;
-    background-color: #ffcb05;
+header {
+  border-bottom: 3px solid black;
+  padding: 4rem;
+  background-color: #ffcb05;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .title {
     letter-spacing: 0.2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+
     h1 {
       font-size: 4rem;
     }
-    .nes-pokeball {
-      position: absolute;
-      right: 4rem;
-    }
-    .nes-ash {
-      position: absolute;
-      left: 4rem;
-    }
+    text-align: center;
+  }
+  .nes-balloon {
+    position: absolute;
+    top: 2rem;
+    padding: 0.3rem;
+  }
+  .nes,
+  .nes-pokeball {
+    padding-top: 2rem;
   }
 }
+
 .container {
   margin: 3rem 10rem;
   display: grid;
@@ -42,7 +46,10 @@
   align-items: center;
   margin: 1rem;
   .gameOver {
-    color: #ff0003;
+    color: #fb3640;
+  }
+  button {
+    pointer-events: none;
   }
 }
 
@@ -56,5 +63,110 @@
   justify-content: center;
   i {
     margin-left: 1rem;
+  }
+}
+
+.loader {
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  place-items: center;
+}
+
+.vibrate {
+  -webkit-animation: vibrate 0.5s linear infinite both;
+  animation: vibrate 0.5s linear infinite both;
+}
+
+@-webkit-keyframes vibrate {
+  0% {
+    -webkit-transform: translate(0);
+    transform: translate(0);
+  }
+  10% {
+    -webkit-transform: translate(-2px, -2px);
+    transform: translate(-2px, -2px);
+  }
+  20% {
+    -webkit-transform: translate(2px, -2px);
+    transform: translate(2px, -2px);
+  }
+  30% {
+    -webkit-transform: translate(-2px, 2px);
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    -webkit-transform: translate(2px, 2px);
+    transform: translate(2px, 2px);
+  }
+  50% {
+    -webkit-transform: translate(-2px, -2px);
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    -webkit-transform: translate(2px, -2px);
+    transform: translate(2px, -2px);
+  }
+  70% {
+    -webkit-transform: translate(-2px, 2px);
+    transform: translate(-2px, 2px);
+  }
+  80% {
+    -webkit-transform: translate(-2px, -2px);
+    transform: translate(-2px, -2px);
+  }
+  90% {
+    -webkit-transform: translate(2px, -2px);
+    transform: translate(2px, -2px);
+  }
+  100% {
+    -webkit-transform: translate(0);
+    transform: translate(0);
+  }
+}
+@keyframes vibrate {
+  0% {
+    -webkit-transform: translate(0);
+    transform: translate(0);
+  }
+  10% {
+    -webkit-transform: translate(-2px, -2px);
+    transform: translate(-2px, -2px);
+  }
+  20% {
+    -webkit-transform: translate(2px, -2px);
+    transform: translate(2px, -2px);
+  }
+  30% {
+    -webkit-transform: translate(-2px, 2px);
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    -webkit-transform: translate(2px, 2px);
+    transform: translate(2px, 2px);
+  }
+  50% {
+    -webkit-transform: translate(-2px, -2px);
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    -webkit-transform: translate(2px, -2px);
+    transform: translate(2px, -2px);
+  }
+  70% {
+    -webkit-transform: translate(-2px, 2px);
+    transform: translate(-2px, 2px);
+  }
+  80% {
+    -webkit-transform: translate(-2px, -2px);
+    transform: translate(-2px, -2px);
+  }
+  90% {
+    -webkit-transform: translate(2px, -2px);
+    transform: translate(2px, -2px);
+  }
+  100% {
+    -webkit-transform: translate(0);
+    transform: translate(0);
   }
 }
