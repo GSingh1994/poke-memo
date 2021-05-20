@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Cards from "./Components/Cards";
 import ScoreBoard from "./Components/ScoreBoard";
+import Footer from "./Components/Footer";
 import "../node_modules/nes.css/css/nes.min.css";
 import "./App.scss";
 
@@ -13,7 +14,7 @@ function App() {
 
   useEffect(() => {
     const fetchUrl = async () => {
-      for (let i = 1; i < 150; i += 3) {
+      for (let i = 1; i < 100; i += 3) {
         let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}/`);
         const data = await response.json();
         setPokeData((preData) => [...preData, data]);
@@ -30,7 +31,7 @@ function App() {
   };
 
   const pokeList = pokeData
-    .slice(lastIndex, lastIndex + 10) //get a slice of some old and some new data
+    .slice(lastIndex, lastIndex + 8) //get a slice of some old and some new data
     .sort(() => Math.random() - 0.5); //Shuffle cards
 
   useEffect(() => {
@@ -42,7 +43,8 @@ function App() {
     <div className="App">
       <header>
         <h1>PokeCards</h1>
-
+        <h6>Gotta Catch 'Em All</h6>
+        <i className="nes-ash"></i>
         <i className="nes-pokeball"></i>
       </header>
       <ScoreBoard userScore={userScore} gameOver={gameOver} />
@@ -57,6 +59,7 @@ function App() {
           />
         ))}
       </main>
+      <Footer />
     </div>
   );
 }
