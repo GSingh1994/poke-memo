@@ -6,6 +6,13 @@ export default function ScoreBoard({ userScore, gameOver }) {
   });
   const prevScore = prevScoreRef.current;
 
+  const localScore = localStorage.getItem("highScore");
+
+  useEffect(() => {
+    localStorage.setItem("highScore", prevScore);
+  }, [gameOver]);
+
+  console.log(prevScore, localStorage);
   return (
     <div className="ScoreBoard">
       <button type="button" className="nes-btn is-primary">
@@ -14,7 +21,15 @@ export default function ScoreBoard({ userScore, gameOver }) {
         ) : (
           <h2 className="gameOver">{gameOver ? "GAME OVER" : null}</h2>
         )}
-        <h2>HighScore:{gameOver ? prevScore : 0}</h2>
+        <h2>
+          HighScore:
+          {/* {gameOver ? prevScore : localScore !== "undefined" ? localScore : 0} */}
+          {gameOver && prevScore > localScore
+            ? prevScore
+            : localScore !== "undefined"
+            ? localScore
+            : 0}
+        </h2>
       </button>
     </div>
   );

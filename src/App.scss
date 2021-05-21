@@ -1,3 +1,7 @@
+.App {
+  background-color: #faf1e6;
+}
+
 header {
   border-bottom: 3px solid black;
   padding: 4rem;
@@ -31,25 +35,48 @@ header {
   row-gap: 4rem;
   column-gap: 4rem;
 }
-
+.cards {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  &:hover {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  }
+}
 #Cards {
+  background-color: #faf3f3;
   padding: 0;
   .sprite {
     width: 15rem;
     image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+  }
+  p {
+    background-color: #faf3f3;
   }
 }
 
 .ScoreBoard {
+  position: absolute;
+  top: 0;
+  right: 15rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
   margin: 1rem;
+  margin-top: 0;
   .gameOver {
     color: #fb3640;
   }
   button {
     pointer-events: none;
+  }
+  &::before {
+    content: "";
+    border-right: 8px double black;
+    border-left: 8px double black;
+    width: 10rem;
+    margin-right: 4rem;
+    height: 3rem;
   }
 }
 

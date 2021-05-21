@@ -7,26 +7,33 @@ import "../node_modules/nes.css/css/nes.min.css";
 import "./App.scss";
 import loaderGif from "./assets/pika.gif";
 
-function App() {
+export default function App() {
   const [pokeData, setPokeData] = useState([]);
   const [lastIndex, setLastIndex] = useState(0);
   const [clickedCards, setClickedCards] = useState([]);
   const [userScore, setUserScore] = useState(-1);
   const [gameOver, setGameOver] = useState(false);
   const [loader, setLoader] = useState(true);
+  const [cardGrid, setCardGrid] = useState([]);
 
   useEffect(() => {
     const fetchUrl = async () => {
-      for (let i = 1; i < 100; i += 3) {
+      for (let i = 1; i < 100; i += 2) {
         let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}/`);
         const data = await response.json();
         setPokeData((preData) => [...preData, data]);
       }
     };
     fetchUrl();
-    const loaderTimer = setTimeout(() => setLoader(false), 1000);
+    const loaderTimer = setTimeout(() => setLoader(false), 1000); //Pikachu gif timer
     return () => clearTimeout(loaderTimer);
   }, []);
+
+  //taking a slice of pokeData
+  useEffect(
+    () => setCardGrid(pokeData.slice(lastIndex, lastIndex + 8)),
+    [pokeData, clickedCards]
+  );
 
   //save card's id only if it's unique otherwise GAMEOVER
   const saveCard = (id) => {
@@ -35,15 +42,9 @@ function App() {
       : setClickedCards([...clickedCards, id]);
   };
 
-  let pokeList = pokeData
-    .slice(lastIndex, lastIndex + 8) //get a slice of some old and some new data
-    .sort(() => Math.random() - 0.5); //Shuffle cards
-
   useEffect(() => {
-    pokeList = pokeData
-      .slice(lastIndex, lastIndex + 8) //get a slice of some old and some new data
-      .sort(() => Math.random() - 0.5);
-    setLastIndex((preIndex) => (preIndex += 1));
+    setCardGrid((preCards) => preCards.sort(() => Math.random() - 0.5)); //shuffle gridCard array
+    setLastIndex((preIndex) => (preIndex += 0.7));
     gameOver ? setUserScore(0) : setUserScore((preScore) => (preScore += 1));
   }, [gameOver, clickedCards]);
 
@@ -51,8 +52,11 @@ function App() {
     <div className="App">
       <Header gameOver={gameOver} />
       <ScoreBoard userScore={userScore} gameOver={gameOver} />
-      <main className="container">
-        {pokeList.map((pokemon) => (
+      <main
+        className="container"
+        style={gameOver ? { pointerEvents: "none" } : null}
+      >
+        {cardGrid.map((pokemon) => (
           <Cards
             key={pokemon.id}
             id={pokemon.id}
@@ -66,23 +70,7 @@ function App() {
     </div>
   ) : (
     <div className="loader">
-      <img src={loaderGif} alt="" />
+      <img src={loaderGif} alt="happy-pikachu" />
     </div>
   );
 }
-
-export default App;
-
-// let shuffled = pokeData
-//   .slice(lastIndex, lastIndex + 8)
-//   .map((a) => ({ sort: Math.random(), value: a }))
-//   .sort((a, b) => a.sort - b.sort)
-//   .map((a) => a.value);
-// function shuffleCards(a) {
-//   const pokeList = a.slice(lastIndex, lastIndex + 8);
-//   for (let i = pokeList.length - 1; i > 0; i--) {
-//     const j = Math.floor(Math.random() * (i + 1));
-//     [pokeList[i], pokeList[j]] = [pokeList[j], pokeList[i]];
-//   }
-//   return pokeList;
-// }
