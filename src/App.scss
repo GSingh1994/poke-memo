@@ -1,5 +1,13 @@
+@import "breakpoint-sass";
+$phone: 480px;
+$tablet: 768px;
+$desktop: 1200px;
+
 .App {
   background-color: #faf1e6;
+  // @include breakpoint($phone) {
+
+  // }
 }
 
 header {
@@ -20,6 +28,7 @@ header {
   .nes-balloon {
     position: absolute;
     top: 2rem;
+    left: 7rem;
     padding: 0.3rem;
   }
   .nes,
@@ -31,7 +40,7 @@ header {
 .container {
   margin: 3rem 10rem;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   row-gap: 4rem;
   column-gap: 4rem;
 }
@@ -45,6 +54,7 @@ header {
 #Cards {
   background-color: #faf3f3;
   padding: 0;
+  height: 100%;
   .sprite {
     width: 15rem;
     image-rendering: pixelated;
@@ -84,7 +94,7 @@ header {
   width: 100%;
   margin-top: 8rem;
   background-color: #ffcb05;
-  padding: 1rem;
+  padding: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -98,6 +108,7 @@ header {
   width: 100vw;
   display: grid;
   place-items: center;
+  background-color: #faf1e6;
 }
 
 .vibrate {
@@ -196,4 +207,19 @@ header {
     -webkit-transform: translate(0);
     transform: translate(0);
   }
+}
+
+.my-node-enter {
+  opacity: 0;
+}
+.my-node-enter-active {
+  opacity: 1;
+  transition: opacity 200ms;
+}
+.my-node-exit {
+  opacity: 1;
+}
+.my-node-exit-active {
+  opacity: 0;
+  transition: opacity 200ms;
 }

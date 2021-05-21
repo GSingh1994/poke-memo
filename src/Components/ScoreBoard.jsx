@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function ScoreBoard({ userScore, gameOver }) {
   const [localScore, setLocalScore] = useState(0);

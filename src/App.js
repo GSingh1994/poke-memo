@@ -18,7 +18,7 @@ export default function App() {
 
   useEffect(() => {
     const fetchUrl = async () => {
-      for (let i = 1; i < 100; i += 2) {
+      for (let i = 1; i < 100; i += 1) {
         let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}/`);
         const data = await response.json();
         setPokeData((preData) => [...preData, data]);
@@ -31,20 +31,19 @@ export default function App() {
 
   //taking a slice of pokeData
   useEffect(
-    () => setCardGrid(pokeData.slice(lastIndex, lastIndex + 8)),
+    () => setCardGrid(pokeData.slice(lastIndex, lastIndex + 10)),
     [pokeData, clickedCards]
   );
 
-  //save card's id only if it's unique otherwise GAMEOVER
   const saveCard = (id) => {
     clickedCards.includes(id)
       ? setGameOver(true)
-      : setClickedCards([...clickedCards, id]);
+      : setClickedCards([...clickedCards, id]); //save card's id only if it's unique otherwise GAMEOVER
   };
 
   useEffect(() => {
     setCardGrid((preCards) => preCards.sort(() => Math.random() - 0.5)); //shuffle gridCard array
-    setLastIndex((preIndex) => (preIndex += 0.7));
+    setLastIndex((preIndex) => (preIndex += 0.5));
     gameOver ? setUserScore(0) : setUserScore((preScore) => (preScore += 1));
   }, [gameOver, clickedCards]);
 
