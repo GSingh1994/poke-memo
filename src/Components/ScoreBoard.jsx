@@ -1,18 +1,22 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+
 export default function ScoreBoard({ userScore, gameOver }) {
-  const prevScoreRef = useRef();
+  const [localScore, setLocalScore] = useState(0);
   useEffect(() => {
-    prevScoreRef.current = userScore;
-  });
-  const prevScore = prevScoreRef.current;
+    const localStorageTuNum = parseInt(localStorage.getItem("highScore"));
+    setLocalScore(localStorageTuNum || 0); //Setting highScore from localStorage if possible
 
-  const localScore = localStorage.getItem("highScore");
+    setHighScore(localScore);
+  }, []);
 
+  const [highScore, setHighScore] = useState(0);
   useEffect(() => {
-    localStorage.setItem("highScore", prevScore);
+    if (userScore > localScore) {
+      setHighScore(userScore);
+      localStorage.setItem("highScore", userScore); //set new highScore on gameOver
+    }
   }, [gameOver]);
 
-  console.log(prevScore, localStorage);
   return (
     <div className="ScoreBoard">
       <button type="button" className="nes-btn is-primary">
@@ -23,12 +27,7 @@ export default function ScoreBoard({ userScore, gameOver }) {
         )}
         <h2>
           HighScore:
-          {/* {gameOver ? prevScore : localScore !== "undefined" ? localScore : 0} */}
-          {gameOver && prevScore > localScore
-            ? prevScore
-            : localScore !== "undefined"
-            ? localScore
-            : 0}
+          {highScore > localScore ? highScore : localScore || 0}
         </h2>
       </button>
     </div>
