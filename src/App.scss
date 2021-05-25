@@ -5,25 +5,33 @@ $desktop: 1200px;
 
 .App {
   background-color: #faf1e6;
-  // @include breakpoint($phone) {
-
-  // }
 }
 
 header {
-  border-bottom: 3px solid black;
-  padding: 4rem;
   background-color: #ffcb05;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  .title {
-    letter-spacing: 0.2rem;
+  text-align: center;
+  padding: 0.6rem;
+  .nes-balloon {
+    display: none;
+  }
+  .nes,
+  .nes-pokeball {
+    display: none;
+  }
 
-    h1 {
-      font-size: 4rem;
+  @include breakpoint($phone) {
+    padding: 4rem;
+    border-bottom: 3px solid black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .title {
+      letter-spacing: 0.2rem;
+      text-align: center;
+      h1 {
+        font-size: 4rem;
+      }
     }
-    text-align: center;
   }
   .nes-balloon {
     position: absolute;
@@ -37,56 +45,76 @@ header {
   }
 }
 
-.container {
-  margin: 3rem 10rem;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  row-gap: 4rem;
-  column-gap: 4rem;
-}
-.cards {
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  &:hover {
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+.ScoreBoard {
+  // display: none;
+  button {
+    width: 100%;
+    border-color: transparent;
+    margin: none;
   }
-}
-#Cards {
-  background-color: #faf3f3;
-  padding: 0;
-  height: 100%;
-  .sprite {
-    width: 15rem;
-    image-rendering: pixelated;
-    image-rendering: -moz-crisp-edges;
-  }
-  p {
-    background-color: #faf3f3;
+  @include breakpoint($phone) {
+    position: absolute;
+    top: 0;
+    right: 15rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin: 1rem;
+    margin-top: 0;
+    .gameOver {
+      color: #fb3640;
+    }
+    button {
+      pointer-events: none;
+    }
+    &::before {
+      content: "";
+      border-right: 8px double black;
+      border-left: 8px double black;
+      width: 10rem;
+      margin-right: 4rem;
+      height: 3rem;
+    }
   }
 }
 
-.ScoreBoard {
-  position: absolute;
-  top: 0;
-  right: 15rem;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  margin: 1rem;
-  margin-top: 0;
-  .gameOver {
-    color: #fb3640;
+.container {
+  display: grid;
+  margin: 1rem 0.5rem;
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: 1rem;
+  column-gap: 1rem;
+  #Cards {
+    background-color: #faf3f3;
+    padding: 0;
+    // width: 7rem;
+    .sprite {
+      image-rendering: pixelated;
+      image-rendering: -moz-crisp-edges;
+    }
+    .title {
+      background-color: #faf3f3;
+      font-size: 0.6rem;
+      margin-top: -1rem;
+    }
   }
-  button {
-    pointer-events: none;
-  }
-  &::before {
-    content: "";
-    border-right: 8px double black;
-    border-left: 8px double black;
-    width: 10rem;
-    margin-right: 4rem;
-    height: 3rem;
+
+  @include breakpoint($phone) {
+    margin: 3rem 10rem;
+    grid-template-columns: repeat(5, 1fr);
+    row-gap: 4rem;
+    column-gap: 4rem;
+    #Cards {
+      height: 100%;
+      .sprite {
+        width: 15rem;
+        image-rendering: pixelated;
+        image-rendering: -moz-crisp-edges;
+      }
+      .title {
+        font-size: unset;
+      }
+    }
   }
 }
 
@@ -109,6 +137,13 @@ header {
   display: grid;
   place-items: center;
   background-color: #faf1e6;
+}
+.cards {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  &:hover {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  }
 }
 
 .vibrate {
