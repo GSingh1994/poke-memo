@@ -43,7 +43,7 @@ export default function App() {
 
   useEffect(() => {
     setCardGrid((preCards) => preCards.sort(() => Math.random() - 0.5)); //shuffle gridCard array
-    setLastIndex((preIndex) => (preIndex += 0.5));
+    setLastIndex((preIndex) => (preIndex += 1));
     gameOver ? setUserScore(0) : setUserScore((preScore) => (preScore += 1));
   }, [gameOver, clickedCards]);
 
@@ -53,7 +53,7 @@ export default function App() {
       <ScoreBoard userScore={userScore} gameOver={gameOver} />
       <main
         className="container"
-        style={gameOver ? { pointerEvents: "none" } : null}
+        style={gameOver ? { pointerEvents: "none" } : null} //Stop card selection on gameover
       >
         {cardGrid.map((pokemon) => (
           <Cards
