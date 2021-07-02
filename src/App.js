@@ -5,7 +5,6 @@ import Footer from "./Components/Footer";
 import Header from "./Components/Header";
 import "../node_modules/nes.css/css/nes.min.css";
 import "./App.scss";
-import loaderGif from "./assets/pika.gif";
 
 export default function App() {
   const [pokeData, setPokeData] = useState([]);
@@ -13,7 +12,6 @@ export default function App() {
   const [clickedCards, setClickedCards] = useState([]);
   const [userScore, setUserScore] = useState(-1);
   const [gameOver, setGameOver] = useState(false);
-  const [loader, setLoader] = useState(true);
   const [cardGrid, setCardGrid] = useState([]);
 
   useEffect(() => {
@@ -25,8 +23,6 @@ export default function App() {
       }
     };
     fetchUrl();
-    const loaderTimer = setTimeout(() => setLoader(false), 1000); //Pikachu gif timer
-    return () => clearTimeout(loaderTimer);
   }, []);
 
   //taking a slice of pokeData
@@ -47,7 +43,7 @@ export default function App() {
     gameOver ? setUserScore(0) : setUserScore((preScore) => (preScore += 1));
   }, [gameOver, clickedCards]);
 
-  return !loader ? (
+  return (
     <div className="App">
       <Header gameOver={gameOver} />
       <ScoreBoard userScore={userScore} gameOver={gameOver} />
@@ -66,10 +62,6 @@ export default function App() {
         ))}
       </main>
       <Footer />
-    </div>
-  ) : (
-    <div className="loader">
-      <img src={loaderGif} alt="happy-pikachu" />
     </div>
   );
 }
