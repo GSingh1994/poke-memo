@@ -1,24 +1,23 @@
 {
   "files": {
-    "main.css": "/poke-memo/static/css/main.6fa235e0.chunk.css",
-    "main.js": "/poke-memo/static/js/main.9aeba720.chunk.js",
-    "main.js.map": "/poke-memo/static/js/main.9aeba720.chunk.js.map",
+    "main.css": "/poke-memo/static/css/main.37bf08a7.chunk.css",
+    "main.js": "/poke-memo/static/js/main.5ac178b0.chunk.js",
+    "main.js.map": "/poke-memo/static/js/main.5ac178b0.chunk.js.map",
     "runtime-main.js": "/poke-memo/static/js/runtime-main.8d5b8823.js",
     "runtime-main.js.map": "/poke-memo/static/js/runtime-main.8d5b8823.js.map",
     "static/css/2.3c2d599a.chunk.css": "/poke-memo/static/css/2.3c2d599a.chunk.css",
-    "static/js/2.e37f9f1b.chunk.js": "/poke-memo/static/js/2.e37f9f1b.chunk.js",
-    "static/js/2.e37f9f1b.chunk.js.map": "/poke-memo/static/js/2.e37f9f1b.chunk.js.map",
+    "static/js/2.6c25971f.chunk.js": "/poke-memo/static/js/2.6c25971f.chunk.js",
+    "static/js/2.6c25971f.chunk.js.map": "/poke-memo/static/js/2.6c25971f.chunk.js.map",
     "index.html": "/poke-memo/index.html",
     "static/css/2.3c2d599a.chunk.css.map": "/poke-memo/static/css/2.3c2d599a.chunk.css.map",
-    "static/css/main.6fa235e0.chunk.css.map": "/poke-memo/static/css/main.6fa235e0.chunk.css.map",
-    "static/js/2.e37f9f1b.chunk.js.LICENSE.txt": "/poke-memo/static/js/2.e37f9f1b.chunk.js.LICENSE.txt",
-    "static/media/pika.a937902d.gif": "/poke-memo/static/media/pika.a937902d.gif"
+    "static/css/main.37bf08a7.chunk.css.map": "/poke-memo/static/css/main.37bf08a7.chunk.css.map",
+    "static/js/2.6c25971f.chunk.js.LICENSE.txt": "/poke-memo/static/js/2.6c25971f.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.8d5b8823.js",
     "static/css/2.3c2d599a.chunk.css",
-    "static/js/2.e37f9f1b.chunk.js",
-    "static/css/main.6fa235e0.chunk.css",
-    "static/js/main.9aeba720.chunk.js"
+    "static/js/2.6c25971f.chunk.js",
+    "static/css/main.37bf08a7.chunk.css",
+    "static/js/main.5ac178b0.chunk.js"
   ]
 }
