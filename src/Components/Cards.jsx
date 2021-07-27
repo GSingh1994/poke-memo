@@ -3,7 +3,7 @@ export default function Cards({ sprite, name, id, saveCard }) {
     <div className="cards">
       <div
         id="Cards"
-        className="nes-pointer nes-container with-title is-centered is-rounded"
+        className="nes-pointer nes-container with-title is-centered "
         onClick={() => saveCard(id)}
       >
         <p className="title">{name}</p>
