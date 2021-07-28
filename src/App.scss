@@ -1,48 +1,78 @@
 @import "breakpoint-sass";
-$phone: 480px;
+$phone: 300px;
 $tablet: 768px;
 $desktop: 1200px;
 
 .App {
   background-color: #faf1e6;
-  // @include breakpoint($phone) {
-
-  // }
 }
 
 header {
   border-bottom: 3px solid black;
-  padding: 4rem;
   background-color: #ffcb05;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  .title {
-    letter-spacing: 0.2rem;
 
-    h1 {
-      font-size: 4rem;
+  @include breakpoint($phone) {
+    .nes,
+    .nes-pokeball,
+    .nes-balloon {
+      display: none;
     }
-    text-align: center;
+    .title {
+      letter-spacing: 0.2rem;
+      text-align: center;
+      h1 {
+        font-size: 1.5rem;
+      }
+    }
   }
-  .nes-balloon {
-    position: absolute;
-    top: 2rem;
-    left: 7rem;
-    padding: 0.3rem;
+  @include breakpoint($tablet) {
+    padding: 1rem;
+    .title {
+      h1 {
+        font-size: 4rem;
+      }
+    }
   }
-  .nes,
-  .nes-pokeball {
-    padding-top: 2rem;
+
+  @include breakpoint($desktop) {
+    padding: 4rem;
+    display: flex;
+    justify-content: space-between;
+    .nes-balloon {
+      position: absolute;
+      top: 2rem;
+      left: 7rem;
+      padding: 0.3rem;
+      display: block;
+    }
+    .nes,
+    .nes-pokeball {
+      padding-top: 2rem;
+      display: block;
+    }
   }
 }
 
 .container {
-  margin: 8rem;
-  margin-top: 3rem;
+  @include breakpoint($phone) {
+    margin: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 1.5rem;
+  }
+  @include breakpoint($tablet) {
+    margin: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+  }
+
+  @include breakpoint($desktop) {
+    margin: 8rem;
+    margin-top: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 4rem;
+  }
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 4rem;
+
   min-height: 35rem;
 }
 
@@ -52,15 +82,26 @@ header {
   border-radius: 5px;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   min-height: 5rem;
-  min-width: 10rem;
+  .title {
+    font-size: 0.7rem;
+  }
   &:hover {
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   }
   .sprite {
-    width: 15rem;
     -ms-interpolation-mode: nearest-neighbor;
     image-rendering: pixelated;
     image-rendering: -moz-crisp-edges;
+  }
+
+  @include breakpoint($tablet) {
+    min-width: 10rem;
+    .title {
+      font-size: 1rem;
+    }
+    .sprite {
+      width: 15rem;
+    }
   }
   p {
     background-color: #faf3f3;
@@ -68,27 +109,37 @@ header {
 }
 
 .ScoreBoard {
-  position: absolute;
-  top: 0;
-  right: 15rem;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  margin: 1rem;
-  margin-top: 0;
-  .gameOver {
-    color: #fb3640;
+  text-align: center;
+  margin-top: 0.5rem;
+  @include breakpoint($phone) {
+    font-size: 0.6rem;
   }
-  button {
-    pointer-events: none;
+  @include breakpoint($tablet) {
+    font-size: 1rem;
   }
-  &::before {
-    content: "";
-    border-right: 8px double black;
-    border-left: 8px double black;
-    width: 10rem;
-    margin-right: 4rem;
-    height: 3rem;
+  @include breakpoint($desktop) {
+    position: absolute;
+    top: 0;
+    right: 13rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin: 1rem;
+    margin-top: 0;
+    .gameOver {
+      color: #fb3640;
+    }
+    button {
+      pointer-events: none;
+    }
+    &::before {
+      content: "";
+      border-right: 8px double black;
+      border-left: 8px double black;
+      width: 10rem;
+      margin-right: 4rem;
+      height: 3rem;
+    }
   }
 }
 
