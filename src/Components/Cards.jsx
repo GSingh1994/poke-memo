@@ -1,14 +1,13 @@
-export default function Cards({ sprite, name, id, saveCard }) {
+export default function Cards({ sprite, name, id, saveCard, gameOver }) {
   return (
-    <div className="cards">
-      <div
-        id="Cards"
-        className="nes-pointer nes-container with-title is-centered "
-        onClick={() => saveCard(id)}
-      >
-        <p className="title">{name}</p>
-        <img className="sprite" src={sprite} alt="" />
-      </div>
+    <div
+      style={gameOver ? { pointerEvents: "none" } : null} //Stop card selection on gameover
+      id="Cards"
+      className="nes-pointer nes-container with-title is-centered "
+      onClick={() => saveCard(id)}
+    >
+      <p className="title">{name}</p>
+      <img className="sprite" src={sprite} alt="" />
     </div>
   );
 }
