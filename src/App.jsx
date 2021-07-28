@@ -5,6 +5,7 @@ import Footer from "./Components/Footer";
 import Header from "./Components/Header";
 import "../node_modules/nes.css/css/nes.min.css";
 import "./App.scss";
+import loaderGif from "./assets/pika.gif";
 import { CSSTransition } from "react-transition-group";
 
 export default function App() {
@@ -14,6 +15,7 @@ export default function App() {
   const [userScore, setUserScore] = useState(-1);
   const [gameOver, setGameOver] = useState(false);
   const [cardGrid, setCardGrid] = useState([]);
+  const [loader, setLoader] = useState(true);
 
   const [inProp, setInProp] = useState(false); //inprop for cssTransition
 
@@ -31,8 +33,13 @@ export default function App() {
   //taking a slice of pokeData
   useEffect(
     () => setCardGrid(pokeData.slice(lastIndex, lastIndex + 10)),
+
     [pokeData, clickedCards]
   );
+  useEffect(() => {
+    const loaderTimer = setTimeout(() => setLoader(false), 1500); //Pikachu gif timer
+    return () => clearTimeout(loaderTimer);
+  }, []);
 
   const saveCard = (id) => {
     clickedCards.includes(id)
@@ -48,7 +55,7 @@ export default function App() {
     gameOver ? setUserScore(0) : setUserScore((preScore) => (preScore += 1));
   }, [clickedCards]);
 
-  return (
+  return !loader ? (
     <div className="App">
       <Header gameOver={gameOver} />
       <ScoreBoard userScore={userScore} gameOver={gameOver} />
@@ -69,6 +76,10 @@ export default function App() {
       </CSSTransition>
 
       <Footer />
+    </div>
+  ) : (
+    <div className="loader">
+      <img src={loaderGif} alt="happy-pikachu" />
     </div>
   );
 }
