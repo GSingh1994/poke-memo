@@ -5,6 +5,7 @@ import Footer from "./Components/Footer";
 import Header from "./Components/Header";
 import "../node_modules/nes.css/css/nes.min.css";
 import "./App.scss";
+import { CSSTransition } from "react-transition-group";
 
 export default function App() {
   const [pokeData, setPokeData] = useState([]);
@@ -13,6 +14,8 @@ export default function App() {
   const [userScore, setUserScore] = useState(-1);
   const [gameOver, setGameOver] = useState(false);
   const [cardGrid, setCardGrid] = useState([]);
+
+  const [inProp, setInProp] = useState(false); //inprop for cssTransition
 
   useEffect(() => {
     const fetchUrl = async () => {
@@ -38,29 +41,33 @@ export default function App() {
   };
 
   useEffect(() => {
-    setCardGrid((preCards) => preCards.sort(() => Math.random() - 0.5)); //shuffle gridCard array
     setLastIndex((preIndex) => (preIndex += 1));
+    setCardGrid((preCards) => preCards.sort(() => Math.random() - 0.5)); //shuffle gridCard array
+
+    setInProp(!inProp);
     gameOver ? setUserScore(0) : setUserScore((preScore) => (preScore += 1));
-  }, [gameOver, clickedCards]);
+  }, [clickedCards]);
 
   return (
     <div className="App">
       <Header gameOver={gameOver} />
       <ScoreBoard userScore={userScore} gameOver={gameOver} />
-      <main
-        className="container"
-        style={gameOver ? { pointerEvents: "none" } : null} //Stop card selection on gameover
-      >
-        {cardGrid.map((pokemon) => (
-          <Cards
-            key={pokemon.id}
-            id={pokemon.id}
-            sprite={pokemon.sprites.front_default}
-            name={pokemon.forms[0].name}
-            saveCard={saveCard}
-          />
-        ))}
-      </main>
+
+      <CSSTransition in={inProp} timeout={100} classNames="my-node">
+        <main className="container">
+          {cardGrid.map((pokemon) => (
+            <Cards
+              key={pokemon.id}
+              id={pokemon.id}
+              sprite={pokemon.sprites.front_default}
+              name={pokemon.forms[0].name}
+              saveCard={saveCard}
+              gameOver={gameOver}
+            />
+          ))}
+        </main>
+      </CSSTransition>
+
       <Footer />
     </div>
   );
